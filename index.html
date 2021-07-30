@@ -6,6 +6,7 @@
 		<link rel="stylesheet" href="node_modules/todomvc-common/base.css">
 		<link rel="stylesheet" href="node_modules/todomvc-app-css/index.css">
 		<link rel="stylesheet" href="css/app.css">
+		<link rel="stylesheet" href="css/tag.css">
 	</head>
 	<body>
 		<section class="todoapp">
@@ -26,6 +27,9 @@
 				<div class="view">
 					<input class="toggle" type="checkbox" {{#if completed}}checked{{/if}}>
 					<label>{{title}}</label>
+					<div class="tag-wrapper">
+					<span class="tag tag--success">标签一</span>
+					</div>
 					<button class="destroy"></button>
 				</div>
 				<input class="edit" value="{{title}}">

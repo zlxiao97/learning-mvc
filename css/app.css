@@ -2,3 +2,7 @@
 #footer {
 	display: none;
 }
+
+.view{
+	position: relative;
+}
