@@ -2,3 +2,12 @@
 #footer {
 	display: none;
 }
+
+.view{
+	position: relative;
+}
+
+.add-tag{
+	cursor: pointer;
+	font-size: 14px;
+}

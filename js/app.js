@@ -8,6 +8,7 @@ jQuery(function ($) {
 
   var ENTER_KEY = 13;
   var ESCAPE_KEY = 27;
+  const TAG_TYPES = ["success", "info", "warning", "danger"];
 
   var util = {
     uuid: function () {
@@ -69,7 +70,8 @@ jQuery(function ($) {
         .on("dblclick", "label", this.editingMode.bind(this))
         .on("keyup", ".edit", this.editKeyup.bind(this))
         .on("focusout", ".edit", this.update.bind(this))
-        .on("click", ".destroy", this.destroy.bind(this));
+        .on("click", ".destroy", this.destroy.bind(this))
+        .on("click", ".add-tag", this.addTag.bind(this));
     },
     render: function () {
       var filteredTodos = this.getFilteredTodos();
@@ -164,7 +166,9 @@ jQuery(function ($) {
       this.todos.push({
         id: util.uuid(),
         title: val,
-        completed: false
+        completed: false,
+        tag: false,
+        tagType:''
       });
 
       $input.val("");
@@ -211,6 +215,17 @@ jQuery(function ($) {
     },
     destroy: function (e) {
       this.todos.splice(this.getIndexFromEl(e.target), 1);
+      this.render();
+    },
+    addTag: function (e) {
+      const el = e.target
+      const $el = $(e.target);
+      const id = $el.data("id");
+      const todo = this.todos.find((todo) => todo.id === id);
+      const inputTag = prompt(`请为事项：${todo.title}添加tag`)
+      const tagType = TAG_TYPES[Math.floor(Math.random() * TAG_TYPES.length)];
+      this.todos[this.getIndexFromEl(el)].tag = inputTag
+      this.todos[this.getIndexFromEl(el)].tagType = tagType
       this.render();
     }
   };
