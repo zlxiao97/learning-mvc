@@ -8,6 +8,7 @@ jQuery(function ($) {
 
   var ENTER_KEY = 13;
   var ESCAPE_KEY = 27;
+  const TAG_TYPES = ["success", "info", "warning", "danger"];
 
   var util = {
     uuid: function () {
@@ -166,7 +167,8 @@ jQuery(function ($) {
         id: util.uuid(),
         title: val,
         completed: false,
-        tag: false
+        tag: false,
+        tagType:''
       });
 
       $input.val("");
@@ -221,7 +223,9 @@ jQuery(function ($) {
       const id = $el.data("id");
       const todo = this.todos.find((todo) => todo.id === id);
       const inputTag = prompt(`请为事项：${todo.title}添加tag`)
+      const tagType = TAG_TYPES[Math.floor(Math.random() * TAG_TYPES.length)];
       this.todos[this.getIndexFromEl(el)].tag = inputTag
+      this.todos[this.getIndexFromEl(el)].tagType = tagType
       this.render();
     }
   };
