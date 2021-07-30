@@ -72,7 +72,8 @@ jQuery(function ($) {
         .on("click", ".destroy", this.destroy.bind(this));
     },
     render: function () {
-      var todos = this.getFilteredTodos();
+      var filteredTodos = this.getFilteredTodos();
+      var todos = this.getSortedTodos(filteredTodos);
       $(".todo-list").html(this.todoTemplate(todos));
       $(".main").toggle(todos.length > 0);
       $(".toggle-all").prop("checked", this.getActiveTodos().length === 0);
@@ -123,6 +124,17 @@ jQuery(function ($) {
       }
 
       return this.todos;
+    },
+    getSortedTodos: function (todos) {
+      return todos.sort(function ({ title: titleA }, { title: titleB }) {
+        if (titleA < titleB) {
+          return -1;
+        } else if (titleA > titleB) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
     },
     destroyCompleted: function () {
       this.todos = this.getActiveTodos();
