@@ -63,11 +63,9 @@ jQuery(function ($) {
     bindEvents: function () {
       $(".new-todo").on("keyup", this.create.bind(this));
       $(".toggle-all").on("change", this.toggleAll.bind(this));
-      $(".footer").on(
-        "click",
-        ".clear-completed",
-        this.destroyCompleted.bind(this)
-      );
+      $(".footer")
+        .on("click", ".clear-completed", this.destroyCompleted.bind(this))
+        .on("change", ".tag-select", this.changeTagFilter.bind(this));
       $(".todo-list")
         .on("change", ".toggle", this.toggle.bind(this))
         .on("dblclick", "label", this.editingMode.bind(this))
@@ -98,7 +96,8 @@ jQuery(function ($) {
         activeTodoWord: util.pluralize(activeTodoCount, "item"),
         completedTodos: todoCount - activeTodoCount,
         filter: this.filter,
-        tagOptions
+        tagOptions,
+        tagFilter: this.tagFilter,
       });
 
       $(".footer")
@@ -125,15 +124,19 @@ jQuery(function ($) {
       });
     },
     getFilteredTodos: function () {
+      const that = this;
+      let result = this.todos;
       if (this.filter === "active") {
-        return this.getActiveTodos();
+        result = this.getActiveTodos();
       }
 
       if (this.filter === "completed") {
-        return this.getCompletedTodos();
+        result = this.getCompletedTodos();
       }
 
-      return this.todos;
+      return result.filter(function (todo) {
+        return that.tagFilter ? todo.tag === that.tagFilter : true;
+      });
     },
     getSortedTodos: function (todos) {
       return todos.sort(function ({ title: titleA }, { title: titleB }) {
@@ -234,6 +237,11 @@ jQuery(function ($) {
       const tagType = TAG_TYPES[Math.floor(Math.random() * TAG_TYPES.length)];
       this.todos[this.getIndexFromEl(el)].tag = inputTag
       this.todos[this.getIndexFromEl(el)].tagType = tagType
+      this.render();
+    },
+    changeTagFilter: function (e) {
+      const payload = e.target.value
+      this.tagFilter = payload;
       this.render();
     }
   };

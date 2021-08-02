@@ -1,3 +1,7 @@
+body{
+	max-width: 750px;
+}
+
 #main,
 #footer {
 	display: none;
@@ -15,7 +19,7 @@
 .tag-select-wrapper{
 	position: absolute;
 	height: 100%;
-	right: 1rem;
+	right: 10rem;
 	transform: translate(0,-3px);
 }
 

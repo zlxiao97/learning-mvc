@@ -56,7 +56,7 @@
 					<select class="tag-select">
 						<option value="">---请选择---</option>
 						{{#each tagOptions}}
-						<option value="{{this}}">{{this}}</option>
+						<option value="{{this}}" {{#eq this ../tagFilter}}selected{{/eq}} >{{this}}</option>
 						{{/each}}
 					</select>
 				</li>
