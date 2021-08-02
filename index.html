@@ -52,6 +52,14 @@
 				<li>
 					<a {{#eq filter 'completed'}}class="selected"{{/eq}}href="#/completed">Completed</a>
 				</li>
+				<li class="tag-select-wrapper">
+					<select class="tag-select">
+						<option value="">---请选择---</option>
+						{{#each tagOptions}}
+						<option value="{{this}}" {{#eq this ../tagFilter}}selected{{/eq}} >{{this}}</option>
+						{{/each}}
+					</select>
+				</li>
 			</ul>
 			{{#if completedTodos}}<button class="clear-completed">Clear completed</button>{{/if}}
 		</script>

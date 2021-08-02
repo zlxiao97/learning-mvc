@@ -1,3 +1,7 @@
+body{
+	max-width: 750px;
+}
+
 #main,
 #footer {
 	display: none;
@@ -10,4 +14,20 @@
 .add-tag{
 	cursor: pointer;
 	font-size: 14px;
+}
+
+.tag-select-wrapper{
+	position: absolute;
+	height: 100%;
+	right: 10rem;
+	transform: translate(0,-3px);
+}
+
+.tag-select{
+	background-color: #fff;
+  border: 1px solid #d9d9d9;
+  border-top: 1.02px solid #d9d9d9;
+  border-radius: 4px;
+	padding: 3px 7px;
+  outline: none;
 }
