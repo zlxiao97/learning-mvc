@@ -31,6 +31,9 @@ jQuery(function ($) {
     pluralize: function (count, word) {
       return count === 1 ? word : word + "s";
     },
+    unique: function (arr) {
+      return Array.from(new Set(arr));
+    },
     /** Model */
     store: function (namespace, data) {
       if (arguments.length > 1) {
@@ -86,11 +89,16 @@ jQuery(function ($) {
     renderFooter: function () {
       var todoCount = this.todos.length;
       var activeTodoCount = this.getActiveTodos().length;
+      const tagTypes = this.todos
+      .map((item) => item.tag)
+      .filter((item) => !!item)
+      const tagOptions = util.unique(tagTypes);
       var template = this.footerTemplate({
         activeTodoCount: activeTodoCount,
         activeTodoWord: util.pluralize(activeTodoCount, "item"),
         completedTodos: todoCount - activeTodoCount,
-        filter: this.filter
+        filter: this.filter,
+        tagOptions
       });
 
       $(".footer")

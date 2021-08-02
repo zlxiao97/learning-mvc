@@ -54,7 +54,10 @@
 				</li>
 				<li class="tag-select-wrapper">
 					<select class="tag-select">
-						<option value="">xxx</option>
+						<option value="">---请选择---</option>
+						{{#each tagOptions}}
+						<option value="{{this}}">{{this}}</option>
+						{{/each}}
 					</select>
 				</li>
 			</ul>
